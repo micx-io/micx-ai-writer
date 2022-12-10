@@ -1,7 +1,5 @@
 import {customElement, KaHtmlElement} from "@kasimirjs/embed";
 import {route} from "@kasimirjs/app";
-import "./elements/file-upload"
-import "./pages/gallery-page"
 import "./pages/index-page"
 
 @customElement("page-start")

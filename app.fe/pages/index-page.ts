@@ -1,8 +1,7 @@
 import {customElement, ka_sleep, KaCustomElement, KaHtmlElement, template} from "@kasimirjs/embed";
-import {api_call, href, link, route, router} from "@kasimirjs/app";
+import {api_call, href, route, router} from "@kasimirjs/app";
 import {currentRoute} from "@kasimirjs/app";
 import {CurRoute} from "@kasimirjs/app";
-import {ImageDetailsModal} from "../modals/image-details-modal";
 import {API} from "../_routes";
 
 // language=html
@@ -81,8 +80,6 @@ class IndexPage extends KaCustomElement {
 
         let subId = currentRoute.route_params["subscription_id"];
 
-
-        this.scope.index = await (await fetch("/v1/api/" + subId + "/info")).json();
         super.connectedCallback();
         this.scope.render();
 

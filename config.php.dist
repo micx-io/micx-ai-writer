@@ -1,13 +1,15 @@
 <?php
 
 define("DEV_MODE", (bool)"%DEV_MODE?0%");
-define("CONF_GCLOUD_INDENTY_FILE", "%CONF_GCLOUD_INDENTY_FILE?/opt/leuffende-8350153ed12a.json%");
-define("CONF_GCLOUD_BUCKET", "%CONF_GCLOUD_BUCKET?micx-ai-writer%");
+
+define ("CONF_WEB_ROOT", "%CONF_WEB_ROOT?%");
 
 define("CONF_SUBSCRIPTION_ENDPOINT", "%CONF_SUBSCRIPTION_ENDPOINT?/opt/mock/subscription%");
 define("CONF_SUBSCRIPTION_CLIENT_ID", "%CONF_SUBSCRIPTION_CLIENT_ID?micx-ai-writer%");
 define("CONF_SUBSCRIPTION_CLIENT_SECRET", "%CONF_SUBSCRIPTION_CLIENT_SECRET?%");
 
+define("CONF_DEEPL_API_KEY", "%CONF_DEEPL_API_KEY?%");
+define("CONF_OPENAI_API_KEY", "%CONF_OPENAI_API_KEY?%");
 define("CONF_DEEPL_API_KEY_FILE", "%CONF_DEEPL_API_KEY_FILE?/opt/.keys/deepl.key%");
 define("CONF_OPENAI_API_KEY_FILE", "%CONF_OPENAI_API_KEY_FILE?/opt/.keys/openai.key%");
 

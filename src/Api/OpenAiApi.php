@@ -8,7 +8,10 @@ class OpenAiApi
 {
 
     public function getApiKey() {
-        return trim (phore_file(CONF_OPENAI_API_KEY_FILE)->get_contents());
+        $key = CONF_OPENAI_API_KEY;
+        if ($key === "")
+            $key = phore_file(CONF_OPENAI_API_KEY_FILE)->get_contents();
+        return trim ($key);
     }
 
 
