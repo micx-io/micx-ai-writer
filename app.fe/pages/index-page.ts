@@ -15,9 +15,9 @@ let html = `
             <select class="form-select" ka.on.change="$fn.vorlageWechseln()" ka.options="vorlagen" ka.bind="$scope.vorlage">
             </select>
         </div>
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">Anfrage</label>
-            <input class="form-control" ka.bind="$scope.question">
+        <div class="mb-3">
+            <label class="form-label" for="inputGroupSelect01">Frage</label>
+            <textarea class="form-control" style="font-family: monospace" rows="8" ka.bind="$scope.question"></textarea>
         </div>
          <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">Best Of</label>

@@ -1,6 +1,6 @@
 <?php
 
-define("DEV_MODE", (bool)"0");
+define("DEV_MODE", (bool)"1");
 
 define ("CONF_WEB_ROOT", "");
 
