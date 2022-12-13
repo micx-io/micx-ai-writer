@@ -26,7 +26,7 @@ let html = `
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">Anzahl Tokens</label>
-            <select class="form-select" value="include" ka.options="[25, 50, 150, 250, 500, 750, 1000]" ka.bind="$scope.max_tokens">
+            <select class="form-select" value="include" ka.options="[25, 50, 150, 250, 500, 750, 1000, 2500, 5000]" ka.bind="$scope.max_tokens">
             </select>
             <button class="btn btn-primary" ka.on.click="$fn.go()">Go</button>
         </div>
