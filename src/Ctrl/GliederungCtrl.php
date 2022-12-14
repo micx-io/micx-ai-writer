@@ -29,6 +29,15 @@ class GliederungCtrl
         $vorlage = preg_replace_callback("/%%(.*?)%%/im", fn($matches) => $body[$matches[1]], $vorlage);
         return ["text" => trim ($this->openAiApi->textComplete($vorlage, 2500)->getText())];
     }
+
+    #[BraceRoute("POST@/{subscription_id}/text/metadescription", "generate_article_metadescription")]
+    public function generateMetaDescription(array $body) {
+
+        $vorlage = file_get_contents(__DIR__ . "/text/generateMetaDescription.md");
+        $vorlage = preg_replace_callback("/%%(.*?)%%/im", fn($matches) => $body[$matches[1]], $vorlage);
+        return ["text" => trim ($this->openAiApi->textComplete($vorlage, 2500)->getText())];
+    }
+
     #[BraceRoute("POST@/{subscription_id}/text/lead", "generate_article_lead")]
     public function generateArticleLead(array $body) {
 

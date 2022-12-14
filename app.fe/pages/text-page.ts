@@ -24,22 +24,24 @@ let html = `
         <div ka.if="gliederung !== null"> 
             <h1 class="mt-3"><input type="text" class="w-100 " ka.bind="$scope.gliederung.titel"></h1>
             <button ka.on.click="$fn.loadArticleLead()">Lead laden</button>
+            <button ka.on.click="$fn.loadMetaDescription()">Meta Description</button>
             <button ka.on.click="$fn.loadStockPhotos()">Stockphotos</button>
             <button ka.on.click="$fn.loadAll()">Alles laden</button>
             <p>Schlagworte für Stockfotos: <span ka.if="gliederung.stockphotos !== null" ka.textContent="gliederung.stockphotos"></span></p>
+            <p ka.if="gliederung.metaDescription !== null">Meta-Description: <span  ka.textContent="gliederung.metaDescription"></span> ([[gliederung.metaDescription.length]] / 155)</p>
             <p ka.if="gliederung.lead !== null" ka.textContent="gliederung.lead"></p>
             <div ka.for="let curGliederung of gliederung.gliederung">
                 <h2 class="mt-3"><input type="text" class="w-100 " ka.bind="curGliederung.titel"></h2>
                 <button ka.on.click="$fn.loadQuestions(curGliederung)">Lade Fragen</button>
                 <button ka.on.click="$fn.loadAbsatzLead(curGliederung)">Lade Lead</button>
-                <p contenteditable="true" ka.if="curGliederung.lead !== null" ka.textContent="curGliederung.lead"></p>
+                <p ka.if="curGliederung.lead !== null" ka.textContent="curGliederung.lead"></p>
                 <div ka.for="let curQuestion of curGliederung.questions">
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01">Frage:</label>
                         <input class="form-control" type="text" ka.bind="curQuestion.question">
                         <button class="btn btn-primary" ka.on.click="$fn.loadAbsatz(curGliederung, curQuestion)">Absatz</button>
                     </div>
-                    <textarea ka.if="curQuestion.text !== null" ka.bind="curQuestion.text" class="form-control"></textarea>
+                    <p ka.if="curQuestion.text !== null" ka.textContent="curQuestion.text" class="form-control"></p>
                 </div>
                  
                 
@@ -85,6 +87,7 @@ class TextPage extends KaCustomElement {
                         titel: result.titel,
                         lead: null,
                         stockphotos: null,
+                        metaDescription: null,
                         gliederung: gliederung,
                     };
 
@@ -114,7 +117,13 @@ class TextPage extends KaCustomElement {
                         await scope.$fn.loadQuestions(g);
                     }
                 },
-
+                loadMetaDescription: async() => {
+                    let result = await api_call(API.generate_article_metadescription_POST, {}, {
+                        art: scope.art, context: scope.context, titel: scope.gliederung.titel
+                    })
+                    scope.gliederung.metaDescription = result.text;
+                    scope.$tpl.render();
+                },
                 loadStockPhotos: async() => {
                     let result = await api_call(API.generate_article_stockphotos_POST, {}, {
                         art: scope.art, context: scope.context, titel: scope.gliederung.titel
