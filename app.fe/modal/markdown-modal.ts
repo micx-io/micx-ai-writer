@@ -1,4 +1,5 @@
 import {KaCustomModal, template} from "@kasimirjs/embed";
+import {textwrap} from "../functions";
 
 
 const html = `
@@ -27,7 +28,7 @@ export class MarkdownModal extends KaCustomModal {
 
     public async show(markdown){
         let scope = this.init({
-            markdown,
+            markdown: textwrap(markdown),
             $fn: {
                 close: () => this.resolve(null)
             }
