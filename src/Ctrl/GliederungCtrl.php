@@ -34,28 +34,28 @@ class GliederungCtrl
 
         $vorlage = file_get_contents(__DIR__ . "/text/generateArtikelLead.md");
         $vorlage = preg_replace_callback("/%%(.*?)%%/im", fn($matches) => $body[$matches[1]], $vorlage);
-        return ["text" => $this->openAiApi->textComplete($vorlage, 2500)->getText()];
+        return ["text" => $this->openAiApi->textComplete($vorlage, 1000)->getText()];
     }
     #[BraceRoute("POST@/{subscription_id}/text/questions", "generate_questions")]
     public function generateQuestions(array $body) {
 
         $vorlage = file_get_contents(__DIR__ . "/text/generateQuestions.md");
         $vorlage = preg_replace_callback("/%%(.*?)%%/im", fn($matches) => $body[$matches[1]], $vorlage);
-        return $this->openAiApi->textComplete($vorlage, 2500)->getJson();
+        return $this->openAiApi->textComplete($vorlage, 1000)->getJson();
     }
     #[BraceRoute("POST@/{subscription_id}/text/absatz_lead", "generate_absatz_lead")]
     public function generateAbsatzLead(array $body) {
 
         $vorlage = file_get_contents(__DIR__ . "/text/generateAbsatzLead.md");
         $vorlage = preg_replace_callback("/%%(.*?)%%/im", fn($matches) => $body[$matches[1]], $vorlage);
-        return ["text" => $this->openAiApi->textComplete($vorlage, 2500)->getText()];
+        return ["text" => $this->openAiApi->textComplete($vorlage, 1000)->getText()];
     }
     #[BraceRoute("POST@/{subscription_id}/text/absatz", "generate_absatz")]
     public function generateAbsatz(array $body) {
 
         $vorlage = file_get_contents(__DIR__ . "/text/generateAbsatzForQuestion.md");
         $vorlage = preg_replace_callback("/%%(.*?)%%/im", fn($matches) => $body[$matches[1]], $vorlage);
-        return ["text" => $this->openAiApi->textComplete($vorlage, 2500)->getText()];
+        return ["text" => $this->openAiApi->textComplete($vorlage, 1000)->getText()];
     }
 
 

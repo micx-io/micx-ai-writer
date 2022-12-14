@@ -28,6 +28,7 @@ class OpenAiApi
             "presence_penalty"=>1
         ]);
         $ret = phore_json_decode($ret);
+        out ($ret);
         return new OpenAiResult($ret);
     }
 
