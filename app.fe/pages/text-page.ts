@@ -3,6 +3,7 @@ import {api_call, href, route, router} from "@kasimirjs/app";
 import {currentRoute} from "@kasimirjs/app";
 import {CurRoute} from "@kasimirjs/app";
 import {API} from "../_routes";
+import {MarkdownModal} from "../modal/markdown-modal";
 
 // language=html
 let html = `
@@ -45,6 +46,9 @@ let html = `
             </div>
             
         </div>
+        <div>
+            <button ka.on.click="$fn.getMarkdown()">Markdown anzeigen</button>
+        </div>
     </div>
     
 </div>
@@ -73,6 +77,7 @@ class TextPage extends KaCustomElement {
                     let gliederung = [];
                     result.gliederung.forEach((e) => gliederung.push({
                         titel: e,
+                        lead: null,
                         questions: []
                     }))
 
@@ -83,6 +88,22 @@ class TextPage extends KaCustomElement {
                         gliederung: gliederung,
                     };
 
+                },
+
+                getMarkdown: async() => {
+                    let markdown = "# " + scope.gliederung.titel
+                    markdown += "\n\n" + scope.gliederung.lead
+                    scope.gliederung.gliederung.forEach((g) => {
+                        markdown += "\n\n## " + g.titel;
+                        markdown += "\n\n" + g.lead;
+
+                        g.questions.forEach((quest) => {
+                            if (quest.text === null)
+                                return;
+                            markdown += "\n\n" + quest.text;
+                        })
+                    })
+                    await (new MarkdownModal()).show(markdown);
                 },
 
                 loadAll: async () => {
