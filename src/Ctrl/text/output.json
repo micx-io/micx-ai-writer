@@ -1,0 +1,65 @@
+{
+  "titel": "Deutschlands Geschichte von 1900 bis 2022",
+  "abschnitte": [
+    {
+      "titel": "1900 - 1933: Weimarer Republik und Nationalsozialismus",
+      "fragen": [
+        "Was waren die Ursachen für den Zusammenbruch der Weimarer Republik?",
+        "In welchen politischen Ideologien unterscheiden sich die Weimarer Republik und das nationalsozialistische Deutschland?",
+        "Wie hat der Nationalsozialismus Deutschland beeinflusst?"
+      ]
+    },
+    {
+      "titel": "1933-1945: Der Zweite Weltkrieg",
+      "fragen": [
+        "Warum haben Hitler und Nazi-Deutschland den Zweiten Weltkrieg angefangen?",
+        "Wie ist es zur Teilung Deutschlands nach dem Krieg gekommen?",
+        " Welche Auswirkungen hat der Krieg auf das heutige Europa gehabt?"
+      ]
+    },
+    {
+      "titel": 1945
+      –
+      1990: Die
+      deutsche
+      Teilung
+      und
+      Wiedervereinigung
+      ",     "
+      fragen
+      ":[       Warum wurde Deutschland in eine kapitalistische Westseite und eine kommunistische Ostseite geteilt ?",
+      Was
+      war
+      die
+      Rolle
+      des
+      Kalten
+      Krieges
+      bei
+      der
+      Teilung/Vereinigung
+      Deutschlands
+      ?
+      ",     Welche Folgen hatte die Wiedervereinigung für Deutschland?"
+    ]
+    },
+    {
+      "Titel": "1990 bis Heute : Neue Herausforderugen im 21. Jahrhunderts",
+      "Fragen": [
+        "Wie ist das Verhältnis zu anderen europäischen Ländern seither gewachsen oder gesunken?",
+        Was
+        sind
+        einige
+        neue
+        Herausforderungen,
+        vor
+        denen
+        Deutschalnd
+        heute
+        steht
+        ?
+        ",    Inwiefern hat sich Europas Position in globaler Politik verändert?"
+      ]
+    }
+  ]
+}

@@ -15,7 +15,7 @@ class OpenAiApi
     }
 
 
-    public function textComplete($question, $maxTokens=150, $bestof=1) {
+    public function textComplete($question, $maxTokens=150, $bestof=1) : OpenAiResult {
         $api = new OpenAi($this->getApiKey());
         $ret = $api->completion([
             "model" => "text-davinci-003",
@@ -28,9 +28,7 @@ class OpenAiApi
             "presence_penalty"=>1
         ]);
         $ret = phore_json_decode($ret);
-        if (isset($ret["choices"][0]["text"]))
-            return $ret["choices"][0]["text"];
-        throw new \Exception("OpenAi Exception: " . print_r($ret, true));
+        return new OpenAiResult($ret);
     }
 
 

@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\Api\OpenAiApi;
 use App\Config\MediaStoreConf;
 use App\Config\AiWriterSubscriptionInfo;
 use App\Type\RepoConf;
@@ -17,6 +18,7 @@ use Lack\Freda\Filesystem\PosixFileSystem;
 use Lack\Freda\FredaModule;
 use Lack\Subscription\Brace\SubscriptionClientModule;
 use Lack\Subscription\Type\T_Subscription;
+use Orhanerday\OpenAi\OpenAi;
 use Phore\Di\Container\Producer\DiService;
 use Phore\Di\Container\Producer\DiValue;
 use Phore\ObjectStore\Driver\GoogleObjectStoreDriver;
@@ -71,6 +73,8 @@ AppLoader::extend(function () {
         );
     }));
 
+
+    $app->define("openAiApi", new DiService(fn() => new OpenAiApi()));
 
     // Define the app so it is also available in dependency-injection
     $app->define("app", new DiValue($app));

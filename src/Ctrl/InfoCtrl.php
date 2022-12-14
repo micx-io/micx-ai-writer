@@ -32,9 +32,9 @@ class InfoCtrl
             $maxTokens = 2000;
         // $question = "Schreibe einen Werbetext für die Homepage eines Zahnarztes über professionelle Zahnreinigung.";
         //$question = $deepL->translate($question, "DE", "EN");
-        $text = $openAi->textComplete($question, $maxTokens, $bestof);
+        $text = $openAi->textComplete($question, $maxTokens, $bestof)->getText();
         return [
-            "text" => wordwrap($text)
+            "text" => wordwrap($text, 100)
         ];
     }
 

@@ -6,6 +6,7 @@ namespace App;
 use App\Ctrl\ElementsCtrl;
 use App\Ctrl\FileCtrl;
 use App\Ctrl\GalleryCtrl;
+use App\Ctrl\GliederungCtrl;
 use App\Ctrl\InfoCtrl;
 use App\Ctrl\ProjectCtrl;
 use App\Ctrl\PropertiesCtrl;
@@ -24,6 +25,7 @@ AppLoader::extend(function (BraceApp $app) {
 
     // Controller classes
     $app->router->registerClass($mount, InfoCtrl::class, [RequireValidAuthTokenMiddleware::class]);
+    $app->router->registerClass($mount, GliederungCtrl::class, [RequireValidAuthTokenMiddleware::class]);
 
 
     // Other stuff
