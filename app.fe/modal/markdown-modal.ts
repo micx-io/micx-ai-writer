@@ -7,7 +7,7 @@ const html = `
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><b>Bild Details:</b></h5>
+                <h5 class="modal-title"><b>Text-Export</b> <span class="badge bg-primary">[[ markdown.split(' ').length]] Wörter</span> </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" ka.on.click="$fn.close()" aria-label="Close"></button>
             </div>
             <div class="modal-body">

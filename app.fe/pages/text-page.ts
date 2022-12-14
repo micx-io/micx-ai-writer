@@ -4,6 +4,7 @@ import {currentRoute} from "@kasimirjs/app";
 import {CurRoute} from "@kasimirjs/app";
 import {API} from "../_routes";
 import {MarkdownModal} from "../modal/markdown-modal";
+import {kaLocalStorage} from "../functions";
 
 // language=html
 let html = `
@@ -65,16 +66,21 @@ class TextPage extends KaCustomElement {
 
     constructor(public route : CurRoute) {
         super();
+
+        let history = kaLocalStorage.get("history", {context: "Schreibe SEO Texte. Benutze Sie statt Du. Kurze Texte.", art: "Blogartikel über Texterstellung im Beruf"});
+
         let scope = this.init({
-            context: "Wir sind eine Tageszeitung in einfacher Sprache.",
-            art: "Zeitungsartikel über Deutschlands Geschichte zwischen 1900 - 2022",
+            context: history.context,
+            art: history.art,
             gliederung: null,
 
             $fn: {
 
                 loadGliederung: async () => {
                     let result = await api_call(API.generate_gliederung_POST, {}, {art: scope.art, context: scope.context});
-                    console.log(result);
+
+                    history.art = scope.art;
+                    history.context = scope.context;
 
                     let gliederung = [];
                     result.gliederung.forEach((e) => gliederung.push({
@@ -112,6 +118,7 @@ class TextPage extends KaCustomElement {
                 loadAll: async () => {
                     scope.$fn.loadStockPhotos();
                     scope.$fn.loadArticleLead();
+                    scope.$fn.loadMetaDescription();
                     for (let g of scope.gliederung.gliederung) {
                         scope.$fn.loadAbsatzLead(g);
                         await scope.$fn.loadQuestions(g);
