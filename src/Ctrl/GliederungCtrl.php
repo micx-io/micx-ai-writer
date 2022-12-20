@@ -20,7 +20,7 @@ class GliederungCtrl
 
         $vorlage = file_get_contents(__DIR__ . "/text/generateGliederung.md");
         $vorlage = preg_replace_callback("/%%(.*?)%%/im", fn($matches) => $body[$matches[1]], $vorlage);
-        return $this->openAiApi->textComplete($vorlage, 2500)->getJson();
+        return $this->openAiApi->textComplete($vorlage, 1500)->getJson();
     }
     #[BraceRoute("POST@/{subscription_id}/text/stockphotos", "generate_article_stockphotos")]
     public function generateArticleStockphotos(array $body) {
