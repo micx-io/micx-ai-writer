@@ -31,10 +31,10 @@ class InfoCtrl
         if ($maxTokens > 2000)
             $maxTokens = 2000;
         // $question = "Schreibe einen Werbetext für die Homepage eines Zahnarztes über professionelle Zahnreinigung.";
-        //$question = $deepL->translate($question, "DE", "EN");
+        $question = $deepL->translate($question, "DE", "EN");
         $text = $openAi->textComplete($question, $maxTokens, $bestof)->getText();
         return [
-            "text" => wordwrap($text, 100)
+            "text" => wordwrap($deepL->translate($text, "EN", "DE"), 100)
         ];
     }
 
