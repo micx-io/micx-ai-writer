@@ -13,8 +13,8 @@ class OpenAiResult
 
 
     public function getText() : string {
-        if (isset($this->data["choices"][0]["text"]))
-            return $this->data["choices"][0]["text"];
+        if (isset($this->data["choices"][0]["message"]["content"]))
+            return $this->data["choices"][0]["message"]["content"];
         return "";
     }
 

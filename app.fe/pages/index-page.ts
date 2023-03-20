@@ -25,6 +25,11 @@ let html = `
             </select>
         </div>
         <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Translate</label>
+            <select class="form-select" value="include" ka.options="[0, 1]" ka.bind="$scope.translate">
+            </select>
+        </div>
+        <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">Anzahl Tokens</label>
             <select class="form-select" value="include" ka.options="[25, 50, 150, 250, 500, 750, 1000, 2500, 5000]" ka.bind="$scope.max_tokens">
             </select>
@@ -58,6 +63,7 @@ class IndexPage extends KaCustomElement {
             vorlage: "",
             max_tokens: 50,
             best_of: 1,
+            translate: 0,
             answer: "",
             $fn: {
                 vorlageWechseln: async () => {
@@ -66,7 +72,12 @@ class IndexPage extends KaCustomElement {
                 },
                 go: async () => {
                     scope.answer = "Bitte warten...";
-                    let result = await api_call(API.text_POST, {}, {question: scope.question, max_tokens: scope.max_tokens, best_of: scope.best_of});
+                    let result = await api_call(API.text_POST, {}, {
+                        question: scope.question,
+                        max_tokens: scope.max_tokens,
+                        best_of: scope.best_of,
+                        translate: scope.translate
+                    });
                     console.log(result);
                     scope.answer = result.text.trim()
                 },
