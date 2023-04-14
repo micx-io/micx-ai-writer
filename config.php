@@ -16,3 +16,5 @@ define("CONF_OPENAI_API_KEY_FILE", "/opt/.keys/openai.key");
 const CONF_API_MOUNT = "/v1/api";
 
 
+const CONF_STORE_PATH = "/data";
+const CONF_STORE_PATH_PRESETS = CONF_STORE_PATH . "/presets";

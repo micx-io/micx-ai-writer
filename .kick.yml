@@ -14,7 +14,9 @@ command:
     - "npm install"
 
 
-  run:
+  init:
+    - "sudo mkdir -p /data"
+    - "sudo chmod -R 777 /data"
 
 
   dev:

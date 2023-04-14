@@ -15,13 +15,13 @@ class OpenAiApi
     }
 
 
-    public function textComplete($question, $maxTokens=150, $bestof=1) : OpenAiResult {
+    public function textComplete($prompt, $question, $maxTokens=150, $bestof=1) : OpenAiResult {
         $api = new OpenAi($this->getApiKey());
         $ret = $api->chat([ 'model' => 'gpt-3.5-turbo',
            'messages' => [
                     [
                         "role" => "system",
-                        "content" => "You are a helpful assistant."
+                        "content" => $prompt
                     ],
                     [
                         "role" => "user",
@@ -29,7 +29,7 @@ class OpenAiApi
                     ]
                 ],
            'temperature' => 1.0,
-           'max_tokens' => $maxTokens,
+          // 'max_tokens' => $maxTokens,
            'frequency_penalty' => 0,
            'presence_penalty' => 0,
         ]);

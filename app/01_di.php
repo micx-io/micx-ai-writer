@@ -4,6 +4,7 @@ namespace App;
 use App\Api\OpenAiApi;
 use App\Config\MediaStoreConf;
 use App\Config\AiWriterSubscriptionInfo;
+use App\Manager\PresetManager;
 use App\Type\RepoConf;
 use App\Type\StorageFacet;
 use Brace\Command\CommandModule;
@@ -49,29 +50,12 @@ AppLoader::extend(function () {
     );
 
 
-    $app->define("mediaStoreConf", new DiService(function (T_Subscription $subscription, RouteParams $routeParams) {
+    $app->define("presetManager", new DiService(function(T_Subscription $subscription) {
+        $manager = new PresetManager(CONF_STORE_PATH_PRESETS);
+        $manager->setSubscriptionId($subscription->subscription_id);
+        return $manager;
+    } ));
 
-        $subscriptionId = $routeParams->get("subscription_id");
-
-        $subInfo = $subscription->getClientPrivateConfig(null, AiWriterSubscriptionInfo::class);
-
-        $scopeId = "";
-        $access = "none";
-        if ($routeParams->has("scope_id")) {
-            $scopeId = $routeParams->get("scope_id");
-            $access = $subInfo->getScopeAccess($scopeId);
-            if ($access === null)
-                throw new \Exception("Scope access to scope '$scopeId' denied:");
-        }
-
-
-        return new MediaStoreConf(
-            $scopeId,
-            $subscriptionId,
-            $access,
-            $subInfo
-        );
-    }));
 
 
     $app->define("openAiApi", new DiService(fn() => new OpenAiApi()));

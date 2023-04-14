@@ -9,6 +9,7 @@ use App\Ctrl\FileCtrl;
 use App\Ctrl\GalleryCtrl;
 use App\Ctrl\GliederungCtrl;
 use App\Ctrl\InfoCtrl;
+use App\Ctrl\PresetCtrl;
 use App\Ctrl\ProjectCtrl;
 use App\Ctrl\PropertiesCtrl;
 use App\Ctrl\RepoCtrl;
@@ -28,6 +29,8 @@ AppLoader::extend(function (BraceApp $app) {
     $app->router->registerClass($mount, InfoCtrl::class, [RequireValidAuthTokenMiddleware::class]);
     $app->router->registerClass($mount, GliederungCtrl::class, [RequireValidAuthTokenMiddleware::class]);
     $app->router->registerClass($mount, AutoCompleteCtrl::class, [RequireValidAuthTokenMiddleware::class]);
+    $app->router->registerClass($mount, PresetCtrl::class, [RequireValidAuthTokenMiddleware::class]);
+
 
 
     // Other stuff

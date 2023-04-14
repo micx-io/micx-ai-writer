@@ -8,5 +8,7 @@ export const API = {
 	"generate_questions_POST": "POST@/v1/api/{subscription_id}/text/questions",
 	"generate_absatz_lead_POST": "POST@/v1/api/{subscription_id}/text/absatz_lead",
 	"generate_absatz_POST": "POST@/v1/api/{subscription_id}/text/absatz",
-	"autocomplete_POST": "POST@/v1/api/{subscription_id}/query/{type}"
+	"autocomplete_POST": "POST@/v1/api/{subscription_id}/query/{type}",
+	"preset_list_GET": "GET@/v1/api/{subscription_id}/presets",
+	"preset_save_POST": "POST@/v1/api/{subscription_id}/presets"
 };
