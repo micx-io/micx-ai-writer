@@ -30,10 +30,10 @@ class PresetManager
      * @throws \Exception
      */
     public function getPresets(string $presetId=null) : array {
-        $presetFile = $this->storeRoot . "/" . $this->subscriptionId . ".json";
-        if ( ! file_exists($presetFile))
-            file_put_contents($presetFile, "[]");
-        $presets = phore_json_decode(file_get_contents($presetFile));
+        $presetFile = phore_file($this->storeRoot . "/" . $this->subscriptionId . ".json");
+        if ( ! $presetFile->exists())
+           $presetFile->set_json([]);
+        $presets = $presetFile->get_json();
         if ($presetId === null)
             return array_values($presets);
         return $presets[$presetId] ?? throw new \Exception("Preset not found");
@@ -49,7 +49,8 @@ class PresetManager
         $presets[$preset->presetId] = $preset;
         if ($preset->prompt === "")
             unset($presets[$preset->presetId]);
-        file_put_contents($presetFile, phore_json_encode($presets));
+
+        phore_file($presetFile)->set_json($presets);
     }
 
 }
