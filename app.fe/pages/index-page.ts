@@ -109,7 +109,7 @@ class IndexPage extends KaCustomElement {
                 },
                 go: async (dialog : boolean=false) => {
 
-                    let prompt = scope.$fn.getSelectedPreset().prompt
+                    let prompt = scope.$fn.getSelectedPreset()?.prompt ?? "Du bis ein hilfreicher Assistent. Du antwortest kurz und präzise.";
                     prompt = prompt.replace(/%(.+?)%/gim, (match, p1) => {
                         return promptMap[p1] ?? alert("Unbekanntes Prompt: " + p1)
                     });
