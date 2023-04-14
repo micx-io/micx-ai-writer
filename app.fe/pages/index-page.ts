@@ -4,6 +4,7 @@ import {currentRoute} from "@kasimirjs/app";
 import {CurRoute} from "@kasimirjs/app";
 import {API} from "../_routes";
 import {Preset, PresetModal} from "../modal/preset-modal";
+import {PromptModal} from "../modal/prompt-modal";
 
 
 
@@ -40,6 +41,7 @@ let html = `
             <label class="input-group-text" for="inputGroupSelect01">Anzahl Tokens</label>
             <select class="form-select" value="include" ka.options="[25, 50, 150, 250, 500, 750, 1000, 2500, 3500, 5000]" ka.bind="$scope.max_tokens">
             </select>
+            <button class="btn btn-outline-secondary" ka.on.click="$fn.go(true)">See prompt</button>
             <button class="btn btn-primary" ka.on.click="$fn.go()">Go</button>
         </div>
         <div class=" mb-3">
@@ -105,12 +107,18 @@ class IndexPage extends KaCustomElement {
                 vorlageWechseln: async () => {
                     await ka_sleep(1);
                 },
-                go: async () => {
+                go: async (dialog : boolean=false) => {
 
                     let prompt = scope.$fn.getSelectedPreset().prompt
                     prompt = prompt.replace(/%(.+?)%/gim, (match, p1) => {
                         return promptMap[p1] ?? alert("Unbekanntes Prompt: " + p1)
                     });
+
+                    if (dialog) {
+                        (new PromptModal()).show(prompt + "\n\n" + scope.question)
+                        return;
+                    }
+
                     scope.answer = "Bitte warten...";
                     let result = await api_call(API.text_POST, {}, {
                         prompt: prompt,
