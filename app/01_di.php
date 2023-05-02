@@ -4,6 +4,7 @@ namespace App;
 use App\Api\OpenAiApi;
 use App\Config\MediaStoreConf;
 use App\Config\AiWriterSubscriptionInfo;
+use App\Manager\ContextManager;
 use App\Manager\PresetManager;
 use App\Type\RepoConf;
 use App\Type\StorageFacet;
@@ -56,6 +57,11 @@ AppLoader::extend(function () {
         return $manager;
     } ));
 
+    $app->define("contextManager", new DiService(function(T_Subscription $subscription) {
+        $manager = new ContextManager(CONF_STORE_PATH_PRESETS);
+        $manager->setSubscriptionId($subscription->subscription_id);
+        return $manager;
+    } ));
 
 
     $app->define("openAiApi", new DiService(fn() => new OpenAiApi()));

@@ -10,5 +10,7 @@ export const API = {
 	"generate_absatz_POST": "POST@/v1/api/{subscription_id}/text/absatz",
 	"autocomplete_POST": "POST@/v1/api/{subscription_id}/query/{type}",
 	"preset_list_GET": "GET@/v1/api/{subscription_id}/presets",
-	"preset_save_POST": "POST@/v1/api/{subscription_id}/presets"
+	"preset_save_POST": "POST@/v1/api/{subscription_id}/presets",
+	"context_list_GET": "GET@/v1/api/{subscription_id}/context",
+	"context_save_POST": "POST@/v1/api/{subscription_id}/context"
 };

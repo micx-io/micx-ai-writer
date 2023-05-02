@@ -5,6 +5,8 @@ import {CurRoute} from "@kasimirjs/app";
 import {API} from "../_routes";
 import {Preset, PresetModal} from "../modal/preset-modal";
 import {PromptModal} from "../modal/prompt-modal";
+import {Context, ContextModal} from "../modal/context-modal";
+
 
 
 
@@ -23,6 +25,13 @@ let html = `
             <button class="btn btn-outline-secondary" ka.on.click="$fn.editPreset()">Edit</button>
             <button class="btn btn-outline-secondary" ka.on.click="$fn.newPreset()">New</button>
         </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Context</label>
+            <select class="form-select" ka.on.change="$fn.vorlageWechseln()" ka.options="context.map((context) => {return {value: context.contextId, text: context.name}})" ka.bind="$scope.selectedContextId">
+            </select>
+            <button class="btn btn-outline-secondary" ka.on.click="$fn.editContext()">Edit</button>
+            <button class="btn btn-outline-secondary" ka.on.click="$fn.newContext()">New</button>
+        </div>
         <div class="mb-3">
             <label class="form-label" for="inputGroupSelect01">Frage</label>
             <textarea class="form-control" style="font-family: monospace" rows="8" ka.bind="$scope.question"></textarea>
@@ -31,7 +40,13 @@ let html = `
             <label class="input-group-text" for="inputGroupSelect01">Best Of</label>
             <select class="form-select" value="include" ka.options="[1,2,3]" ka.bind="$scope.best_of">
             </select>
+        </div> 
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Best Of</label>
+            <chip-input class="form-control"></chip-input>
+            </select>
         </div>
+        
         <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">Translate</label>
             <select class="form-select" value="include" ka.options="[0, 1]" ka.bind="$scope.translate">
@@ -79,7 +94,9 @@ class IndexPage extends KaCustomElement {
         let scope = this.init({
             question: "",
             presets: [],
+            context: [],
             selectedPresetId: null,
+            selectedContextId: null,
             max_tokens: 3500,
             best_of: 1,
             translate: 0,
@@ -88,11 +105,28 @@ class IndexPage extends KaCustomElement {
                 reloadPresets: async () => {
                     scope.presets = await api_call(API.preset_list_GET, {});
                 },
+                reloadContext: async () => {
+                    scope.context = await api_call(API.context_list_GET, {});
+                },
 
                 newPreset: async () => {
                     let preset = await (new PresetModal()).show(null)
                     await api_call(API.preset_save_POST, {}, preset);
                     await scope.$fn.reloadPresets();
+                },
+
+                newContext: async () => {
+                    let context = await (new ContextModal()).show(null)
+                    await api_call(API.context_save_POST, {}, context);
+                    await scope.$fn.reloadContext();
+                },
+                getSelectedContext: () : Context => {
+                    return scope.context.find(p => p.contextId == scope.selectedContextId)
+                },
+                editContext: async () => {
+                    let context = await (new ContextModal()).show(scope.$fn.getSelectedContext())
+                    await api_call(API.context_save_POST, {}, context);
+                    await scope.$fn.reloadContext();
                 },
 
                 getSelectedPreset: () : Preset => {
@@ -114,8 +148,10 @@ class IndexPage extends KaCustomElement {
                         return promptMap[p1] ?? alert("Unbekanntes Prompt: " + p1)
                     });
 
+                    let context = scope.$fn.getSelectedContext()?.prompt ?? "";
+
                     if (dialog) {
-                        (new PromptModal()).show(prompt + "\n\n" + scope.question)
+                        (new PromptModal()).show(prompt + "\n\n" + context + "\n\n" + scope.question)
                         return;
                     }
 
@@ -134,6 +170,7 @@ class IndexPage extends KaCustomElement {
             }
         })
         scope.$fn.reloadPresets();
+        scope.$fn.reloadContext();
     }
 
     async connectedCallback(): Promise<void> {

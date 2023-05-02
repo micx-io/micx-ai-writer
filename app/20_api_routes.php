@@ -4,6 +4,7 @@ namespace App;
 
 
 use App\Ctrl\AutoCompleteCtrl;
+use App\Ctrl\ContextCtrl;
 use App\Ctrl\ElementsCtrl;
 use App\Ctrl\FileCtrl;
 use App\Ctrl\GalleryCtrl;
@@ -30,6 +31,7 @@ AppLoader::extend(function (BraceApp $app) {
     $app->router->registerClass($mount, GliederungCtrl::class, [RequireValidAuthTokenMiddleware::class]);
     $app->router->registerClass($mount, AutoCompleteCtrl::class, [RequireValidAuthTokenMiddleware::class]);
     $app->router->registerClass($mount, PresetCtrl::class, [RequireValidAuthTokenMiddleware::class]);
+    $app->router->registerClass($mount, ContextCtrl::class, [RequireValidAuthTokenMiddleware::class]);
 
 
 
