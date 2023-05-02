@@ -40,11 +40,6 @@ let html = `
             <label class="input-group-text" for="inputGroupSelect01">Best Of</label>
             <select class="form-select" value="include" ka.options="[1,2,3]" ka.bind="$scope.best_of">
             </select>
-        </div> 
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">Best Of</label>
-            <chip-input class="form-control"></chip-input>
-            </select>
         </div>
         
         <div class="input-group mb-3">
