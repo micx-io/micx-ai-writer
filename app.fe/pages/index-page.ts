@@ -18,13 +18,7 @@ let html = `
 <div class="container-xxl">
     <div class="row">
         <h2>Bitte Thema wählen:</h2>
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">Vorlage</label>
-            <select class="form-select" ka.on.change="$fn.vorlageWechseln()" ka.options="presets.map((preset) => {return {value: preset.presetId, text: preset.presetName}})" ka.bind="$scope.selectedPresetId">
-            </select>
-            <button class="btn btn-outline-secondary" ka.on.click="$fn.editPreset()">Edit</button>
-            <button class="btn btn-outline-secondary" ka.on.click="$fn.newPreset()">New</button>
-        </div>
+
         <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">Context</label>
             <select class="form-select" ka.on.change="$fn.vorlageWechseln()" ka.options="context.map((context) => {return {value: context.contextId, text: context.name}})" ka.bind="$scope.selectedContextId">
@@ -32,6 +26,14 @@ let html = `
             <button class="btn btn-outline-secondary" ka.on.click="$fn.editContext()">Edit</button>
             <button class="btn btn-outline-secondary" ka.on.click="$fn.newContext()">New</button>
         </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Vorlage</label>
+            <select class="form-select" ka.on.change="$fn.vorlageWechseln()" ka.options="presets.map((preset) => {return {value: preset.presetId, text: preset.presetName}})" ka.bind="$scope.selectedPresetId">
+            </select>
+            <button class="btn btn-outline-secondary" ka.on.click="$fn.editPreset()">Edit</button>
+            <button class="btn btn-outline-secondary" ka.on.click="$fn.newPreset()">New</button>
+        </div>
+        
         <div class="mb-3">
             <label class="form-label" for="inputGroupSelect01">Frage</label>
             <textarea class="form-control" style="font-family: monospace" rows="8" ka.bind="$scope.question"></textarea>
