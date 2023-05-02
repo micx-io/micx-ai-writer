@@ -145,15 +145,17 @@ class IndexPage extends KaCustomElement {
 
                     let context = scope.$fn.getSelectedContext()?.prompt ?? "";
 
+                    let sendPrompt = context + "\n\n" + prompt + "\n\n" + scope.question;
+
                     if (dialog) {
-                        (new PromptModal()).show(prompt + "\n\n" + context + "\n\n" + scope.question)
+                        (new PromptModal()).show(sendPrompt)
                         return;
                     }
 
                     scope.answer = "Bitte warten...";
                     let result = await api_call(API.text_POST, {}, {
-                        prompt: prompt,
-                        question: scope.question,
+                        prompt: "",
+                        question: sendPrompt,
                         max_tokens: scope.max_tokens,
                         best_of: scope.best_of,
                         translate: scope.translate
