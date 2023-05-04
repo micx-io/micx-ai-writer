@@ -27,12 +27,17 @@ AppLoader::extend(function (BraceApp $app) {
     $mount = CONF_API_MOUNT;
 
     // Controller classes
+
+    // Autoload Controller Classes and routes from directory
+    $app->router->autoload($mount, __DIR__ . "/../src/Ctrl/*.php");
+
+    /*
     $app->router->registerClass($mount, InfoCtrl::class, [RequireValidAuthTokenMiddleware::class]);
     $app->router->registerClass($mount, GliederungCtrl::class, [RequireValidAuthTokenMiddleware::class]);
     $app->router->registerClass($mount, AutoCompleteCtrl::class, [RequireValidAuthTokenMiddleware::class]);
     $app->router->registerClass($mount, PresetCtrl::class, [RequireValidAuthTokenMiddleware::class]);
     $app->router->registerClass($mount, ContextCtrl::class, [RequireValidAuthTokenMiddleware::class]);
-
+    */
 
 
     // Other stuff
