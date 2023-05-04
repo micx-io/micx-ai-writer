@@ -29,8 +29,8 @@ class InfoCtrl
         $bestof = (int)$body["best_of"];
         if ($bestof > 3)
             $bestof = 3;
-        if ($maxTokens > 3000)
-            $maxTokens = 3000;
+        if ($maxTokens > 4000)
+            $maxTokens = 4000;
         // $question = "Schreibe einen Werbetext für die Homepage eines Zahnarztes über professionelle Zahnreinigung.";
         if ($body["translate"] === 1)
             $question = $deepL->translate($question, "DE", "EN");
@@ -38,7 +38,7 @@ class InfoCtrl
         if ($body["translate"] === 1)
             $text = $deepL->translate($text, "EN", "DE");
         return [
-            "text" => wordwrap($text, 100)
+            "text" => $text
         ];
     }
 
