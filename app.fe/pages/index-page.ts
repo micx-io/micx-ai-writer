@@ -27,7 +27,7 @@ let html = `
             <button class="btn btn-outline-secondary" ka.on.click="$fn.newContext()">New</button>
         </div>
         <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">Vorlage</label>
+            <label class="input-group-text" for="inputGroupSelect01">Prompt</label>
             <select class="form-select" ka.on.change="$fn.vorlageWechseln()" ka.options="presets.map((preset) => {return {value: preset.presetId, text: preset.presetName}})" ka.bind="$scope.selectedPresetId">
             </select>
             <button class="btn btn-outline-secondary" ka.on.click="$fn.editPreset()">Edit</button>
@@ -35,7 +35,7 @@ let html = `
         </div>
         
         <div class="mb-3">
-            <label class="form-label" for="inputGroupSelect01">Frage</label>
+            <label class="form-label" for="inputGroupSelect01">Input</label>
             <textarea class="form-control" style="font-family: monospace" rows="8" ka.bind="$scope.question"></textarea>
         </div>
          <div class="input-group mb-3">
@@ -147,17 +147,18 @@ class IndexPage extends KaCustomElement {
 
                     let context = scope.$fn.getSelectedContext()?.prompt ?? "";
 
-                    let sendPrompt = context + "\n\n" + prompt + "\n\n" + scope.question;
+                    let sendQuestion = "\n\```context (ignore this block for output generation)\n" + context + "\n```\n\n```input\n" + scope.question + "\n```";
 
+                    let showPrompt = prompt + "\n\n" + sendQuestion;
                     if (dialog) {
-                        (new PromptModal()).show(sendPrompt)
+                        (new PromptModal()).show(showPrompt)
                         return;
                     }
 
                     scope.answer = "Bitte warten...";
                     let result = await api_call(API.text_POST, {}, {
-                        prompt: "",
-                        question: sendPrompt,
+                        prompt: null,
+                        question: showPrompt,
                         max_tokens: scope.max_tokens,
                         best_of: scope.best_of,
                         translate: scope.translate

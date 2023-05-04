@@ -17,22 +17,24 @@ class OpenAiApi
 
     public function textComplete($prompt, $question, $maxTokens=150, $bestof=1) : OpenAiResult {
         $api = new OpenAi($this->getApiKey());
-        $ret = $api->chat([ 'model' => 'gpt-3.5-turbo',
-           'messages' => [
-                    [
-                        "role" => "system",
-                        "content" => $prompt
-                    ],
-                    [
-                        "role" => "user",
-                        "content" => $question
-                    ]
+
+        $input = [ 'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                [
+                    "role" => "user",
+                    "content" => $question
                 ],
-           'temperature' => 1.0,
-          // 'max_tokens' => $maxTokens,
-           'frequency_penalty' => 0,
-           'presence_penalty' => 0,
-        ]);
+
+            ],
+            'temperature' => 1.0,
+            // 'max_tokens' => $maxTokens,
+            'frequency_penalty' => 0,
+            'presence_penalty' => 0,
+        ];
+        out("Input", $input);
+
+        $ret = $api->chat($input);
+        out($ret);
         /*
         $ret = $api->completion([
             "model" => "text-davinci-004",
