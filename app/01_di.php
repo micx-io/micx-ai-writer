@@ -30,7 +30,7 @@ use Phore\VCS\VcsFactory;
 use Psr\Http\Message\ServerRequestInterface;
 
 
-BraceDbg::SetupEnvironment(true, ["192.168.178.20", "aiwriter.micx.io" => EnvironmentType::TEST, "localhost", "localhost:5000"]);
+BraceDbg::SetupEnvironment(true, ["192.168.178.20", "aiwriter.micx.io" => EnvironmentType::TEST, "localhost" => EnvironmentType::TEST, "localhost:5000"]);
 
 
 AppLoader::extend(function () {
