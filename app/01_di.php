@@ -11,6 +11,7 @@ use App\Type\StorageFacet;
 use Brace\Command\CommandModule;
 use Brace\Core\AppLoader;
 use Brace\Core\BraceApp;
+use Brace\Core\EnvironmentType;
 use Brace\Dbg\BraceDbg;
 use Brace\Mod\Request\Zend\BraceRequestLaminasModule;
 use Brace\Router\RouterModule;
@@ -29,7 +30,7 @@ use Phore\VCS\VcsFactory;
 use Psr\Http\Message\ServerRequestInterface;
 
 
-BraceDbg::SetupEnvironment(true, ["192.168.178.20", "localhost", "localhost:5000"]);
+BraceDbg::SetupEnvironment(true, ["192.168.178.20", "aiwriter.leuffen.de" => EnvironmentType::TEST, "localhost", "localhost:5000"]);
 
 
 AppLoader::extend(function () {
