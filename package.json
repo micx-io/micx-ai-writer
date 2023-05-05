@@ -31,7 +31,7 @@
     "@kasimirjs/kit-bootstrap": ">=1.0.4",
     "reflect-metadata": "*"
   },
-  "workspaces": [
+  "workspaces--": [
     "workspaces/*"
   ],
   "devDependencies": {
