@@ -1,0 +1,27 @@
+Extract data from PDF Invoice listed below and return JSON Object of type InvoiceDetails:
+
+type InvoiceDetails = {
+  senderName : string;
+
+  // Merchant VAT Number (USt-IDNr.)
+  senderVatNumber: string;
+  receiverName : string;
+  customerNumber: string | null;
+  invoiceNumber: string;
+  // Date format: YYYY-MM-DD
+  invoiceDate: string;
+  invoiceTotal: number;
+  invoiceVat: number;
+  invoiceVatPercentage: number;
+  invoiceNet: number;
+  invoiceCurrency: "EUR" | "USD";
+
+  classification: "goods" | "services" | "travel" | "advertisement" | "mixed";
+
+
+
+  // Short description of the goods or services e.G. Books, Advertisment, etc.
+  description: string
+};
+
+The Invoice:

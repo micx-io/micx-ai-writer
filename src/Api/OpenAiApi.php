@@ -15,7 +15,7 @@ class OpenAiApi
     }
 
 
-    public function textComplete($prompt, $question, $maxTokens=150, $bestof=1) : OpenAiResult {
+    public function textComplete($promptNotUsed, $question, $maxTokens=150, $bestof=1) : OpenAiResult {
         $api = new OpenAi($this->getApiKey());
 
         $input = [ 'model' => 'gpt-3.5-turbo',
