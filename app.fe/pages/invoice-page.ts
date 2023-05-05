@@ -51,7 +51,7 @@ class TextPage extends KaCustomElement {
 
 
         let scope = this.init({
-            fields: ["filename", "senderName", "senderVatNumber", "invoiceId", "invoiceDate", "invoiceTotal",
+            fields: ["filename", "senderName", "senderVatNumber", "invoiceNumber", "customerNumber", "invoiceDate", "invoiceTotal",
                 "invoiceNet", "invoiceVat", "invoiceVatPercentage", "invoiceCurrency", "classification"],
 
             result: [],

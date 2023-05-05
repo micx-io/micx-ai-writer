@@ -1,4 +1,4 @@
-Extract data from PDF Invoice listed below and return JSON Object of type InvoiceDetails:
+Extract data from PDF Invoice listed below and return JSON Object of type InvoiceDetails: Output only valid JSON!
 
 type InvoiceDetails = {
   senderName : string;
@@ -7,7 +7,10 @@ type InvoiceDetails = {
   senderVatNumber: string;
   receiverName : string;
   customerNumber: string | null;
+
+  // Unique Invoice Number / Rechnungs-Nr. e.g.
   invoiceNumber: string;
+
   // Date format: YYYY-MM-DD
   invoiceDate: string;
   invoiceTotal: number;
