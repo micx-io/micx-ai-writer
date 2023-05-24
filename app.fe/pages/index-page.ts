@@ -38,17 +38,25 @@ let html = `
             <label class="form-label" for="inputGroupSelect01">Input</label>
             <textarea class="form-control" style="font-family: monospace" rows="8" ka.bind="$scope.question"></textarea>
         </div>
-         <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">Best Of</label>
-            <select class="form-select" value="include" ka.options="[1,2,3]" ka.bind="$scope.best_of">
-            </select>
+        
+        <div class="row">
+            <div class="col"><div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Best Of</label>
+                <select class="form-select" value="include" ka.options="[1,2,3]" ka.bind="$scope.best_of">
+                </select>
+            </div>
+            </div>
+            
+            <div class="col"><div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Translate</label>
+                <select class="form-select" value="include" ka.options="['none', 'both', 'result']" ka.bind="$scope.translate">
+                </select>
+            </div>
+            </div>
+            
         </div>
         
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">Translate</label>
-            <select class="form-select" value="include" ka.options="[0, 1]" ka.bind="$scope.translate">
-            </select>
-        </div>
+         
         <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">Anzahl Tokens</label>
             <select class="form-select" value="include" ka.options="[25, 50, 150, 250, 500, 750, 1000, 2500, 3500, 5000]" ka.bind="$scope.max_tokens">

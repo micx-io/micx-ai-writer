@@ -22,6 +22,9 @@ class AutoCompleteCtrl
         $vorlage = trim(implode("\n", $vorlage));
 
         $vorlage = preg_replace_callback("/%%(.*?)%%/im", fn($matches) => $body[$matches[1]], $vorlage);
+
+
+
         if ($firstLine["type"] === "json")
             return ["type" => "json", "result" => $this->openAiApi->textComplete($vorlage, 1500)->getJson()];
         return ["type"=> "text", "result" => $this->openAiApi->textComplete($vorlage, 1500)->getText()];

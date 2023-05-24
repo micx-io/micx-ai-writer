@@ -24,7 +24,7 @@ class InfoCtrl
         $openAi = new OpenAiApi();
 
         $question = $body["question"];
-        $prompt = $body["prompt"];
+        $prompt = ""; // not used any more $body["prompt"];
         $maxTokens = (int)$body["max_tokens"];
         $bestof = (int)$body["best_of"];
         if ($bestof > 3)
@@ -32,10 +32,10 @@ class InfoCtrl
         if ($maxTokens > 4000)
             $maxTokens = 4000;
         // $question = "Schreibe einen Werbetext für die Homepage eines Zahnarztes über professionelle Zahnreinigung.";
-        if ($body["translate"] === 1)
+        if ($body["translate"] === "both")
             $question = $deepL->translate($question, "DE", "EN");
         $text = $openAi->textComplete($prompt, $question, $maxTokens, $bestof)->getText();
-        if ($body["translate"] === 1)
+        if ($body["translate"] === "both" || $body["translate"] === "result")
             $text = $deepL->translate($text, "EN", "DE");
         return [
             "text" => $text
